@@ -19,6 +19,6 @@ class DiffGeneratorTest {
         val src = Paths.get(javaClass.classLoader.getResource("file1.java").toURI()).toString()
         val dst = Paths.get(javaClass.classLoader.getResource("file2.java").toURI()).toString()
         val diff = diffGenerator.generateDiff(src, dst)
-        diff.editScript.forEach { println(it) }
+        diff.forEach { println(it) }
     }
 }

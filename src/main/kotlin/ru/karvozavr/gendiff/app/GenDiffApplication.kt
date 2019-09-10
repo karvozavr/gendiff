@@ -15,6 +15,7 @@ class GenDiffApplication(private val src: Path, private val dst: Path) {
             printAst(src.toString())
             printAst(dst.toString())
             printDiff(src.toString(), dst.toString())
+            diffGenerator.showHTMLDiff(src.toString(), dst.toString())
         } else {
             System.err.println("ERROR: file does not exist.")
         }
@@ -22,13 +23,13 @@ class GenDiffApplication(private val src: Path, private val dst: Path) {
 
     private fun printDiff(src: String, dst: String) {
         println("===== Diff of $src tree to $dst tree =====")
-        DiffGenerator().generateDiff(src, dst).editScript.forEach { println(it) }
+        diffGenerator.generateDiff(src, dst).forEach { println(it) }
         println()
     }
 
     private fun printAst(file: String) {
         println("===== AST of $file =====")
-        println(ASTGenerator().generate(file))
+        println(treeGenerator.generate(file))
         println()
     }
 }
