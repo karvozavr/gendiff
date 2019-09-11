@@ -14,8 +14,10 @@ class DiffGenerator {
     fun generateDiff(source: String, destination: String): EditScript {
         Run.initGenerators()
 
-        val src = Generators.getInstance().getTree(source)
-        val dst = Generators.getInstance().getTree(destination)
+        val generator = "java-jdt"
+
+        val src = Generators.getInstance().getTree(generator, source)
+        val dst = Generators.getInstance().getTree(generator, destination)
 
         val mappings: MappingStore = Matchers.getInstance().matcher.match(src.root, dst.root)
         return ChawatheScriptGenerator().computeActions(mappings)
